@@ -43,7 +43,6 @@ async function selectFilters(page: any, activity: string, timeOfDay: string, sel
   
   console.log(`Looking for day number: ${dayNumber} in calendar`);
   await page.act(`Click on the number ${dayNumber} in the calendar`);
-  await page.waitForTimeout(2000);
   // Step 5: Select time of day
   console.log(`Selecting time of day: ${timeOfDay}`);
   await page.act(`Click the time filter or time selection dropdown`);
@@ -100,10 +99,8 @@ async function checkAndExtractCourts(page: any, timeOfDay: string): Promise<void
       console.log(`🔄 Trying ${altTime} time period...`);
       
       await page.act(`Click the time filter dropdown that currently shows "${timeOfDay}"`);
-      await page.waitForTimeout(1000);
       // Select alternative time from the dropdown
       await page.act(`Select ${altTime} from the time period options`);
-      await page.waitForTimeout(1000);
       await page.act(`Click the Done button`);
       
       // Check again for available courts
@@ -183,17 +180,13 @@ async function bookCourt(page: any): Promise<void> {
     // Step 1: Click the top available time slot
     console.log("🕐 Clicking the top available time slot...");
     await page.act("Click the first available time slot or court booking option");
-    await page.waitForTimeout(2000);
     // Step 2: Click on the participant dropdown
     console.log("👥 Opening participant dropdown...");
     await page.act("Click the participant dropdown menu or select participant field");
-    await page.waitForTimeout(1000);
     await page.act("Click the only named participant in the dropdown!");
-    await page.waitForTimeout(1000);
     // Step 3: Click the book button
     console.log("Clicking the book button to complete reservation...");
     await page.act("Click the book, reserve, or confirm booking button");
-    await page.waitForTimeout(3000);
     // Step 4: Click the Send Code Button
     await page.act("Click the Send Code Button");
     
@@ -216,9 +209,7 @@ async function bookCourt(page: any): Promise<void> {
     
     // Step 6: Fill in the verification code
     await page.act(`Fill in the verification code field with "${codeAnswer.verificationCode}"`);
-    await page.waitForTimeout(3000);
     await page.act("Click the confirm button");
-    await page.waitForTimeout(3000);
     // Step 7: Check for confirmation
     console.log("✅ Checking for booking confirmation...");
     const confirmation = await page.extract({
