@@ -1,0 +1,4 @@
+.env
+dist
+.claude
+node_modules
